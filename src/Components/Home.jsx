@@ -64,11 +64,11 @@ function Home() {
         {clothesList.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col items-center justify-center p-2 border-2 border-black rounded-md w-[100px] h-auto"
+            className="flex flex-col items-center justify-center p-2 border-2 border-black rounded-md w-auto h-auto"
           >
             <img
               src={item.photo}
-              className="w-full h-[70px] object-cover rounded-md mb-2"
+              className="w-full h-[10vh] object-cover rounded-md mb-2"
               alt="clothes"
             />
             <p className="text-center text-sm font-semibold">{item.type}</p>
@@ -84,7 +84,7 @@ function Home() {
           </div>
         ))}
       </div>
-        <br />
+      <br />
       <Footer />
     </div>
   );
