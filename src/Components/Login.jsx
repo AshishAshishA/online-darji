@@ -62,7 +62,7 @@ const Login = () => {
       }
     );
 
-    // console.log(response);
+    console.log(response);
 
     if (response.data?.message == "Invalid credentials") {
       setCredentialError("Either mobile num or password is wrong");

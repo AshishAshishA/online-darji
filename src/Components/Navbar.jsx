@@ -9,9 +9,8 @@ import {
   userProfileState,
   orderCartState,
   mobileNumberState,
-  clothesListState,
   selectedClothesState,
-  BASE_URL
+  BASE_URL,
 } from "../state/state";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -20,7 +19,6 @@ const Navbar = () => {
   const [profile, setProfile] = useRecoilState(userProfileState);
   const [orderCart, setOrderCart] = useRecoilState(orderCartState);
   const [mobileNumber, setMobileNumber] = useRecoilState(mobileNumberState);
-  const [clothesList, setClothesList] = useRecoilState(clothesListState);
   const [selectedClothes, setSelectedClothes] =
     useRecoilState(selectedClothesState);
 

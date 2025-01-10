@@ -27,7 +27,7 @@ export const orderStatus = {
   delivered: "DELIVERED",
 };
 
-export const BASE_URL = "https://online-darji-wala.onrender.com";
+export const BASE_URL = "http://127.0.0.1:8000";
 
 export const orderItem = {
   shirt: "SHIRT",

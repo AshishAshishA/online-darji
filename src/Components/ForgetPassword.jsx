@@ -38,18 +38,16 @@ const ForgetPassword = () => {
   };
 
   const handleSubmit = async () => {
-    const response = await axios.post(
-      `${BASE_URL}/password/`,
-      {
-        mobile_num: mobileNum,
-        password: password,
-        confirmPassword: confirmPassword,
-      }
-    );
+    const response = await axios.post(`${BASE_URL}/change/password/`, {
+      mobile_num: mobileNum,
+      password: password,
+      confirmPassword: confirmPassword,
+    });
+    console.log(response);
 
-    if (response.status == 201) {
+    if (response.status == 200 && response.data.status == 201) {
       navigate("/login");
-    } else if (response.status == 404) {
+    } else if (response.status == 200 && response.data.status == 404) {
       setConfirmPasswordError(response.data.message);
     } else {
       setConfirmPasswordError("Something went wrong: password has not changed");
