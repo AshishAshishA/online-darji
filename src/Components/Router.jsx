@@ -7,7 +7,7 @@ import Cartview from "./Cartview";
 import OtpVerify from "./OtpVerify";
 import { createBrowserRouter } from "react-router-dom";
 import Book from "./Book";
-import ForgetPassword from "./forgetPassword";
+import ForgetPassword from "./ForgetPassword";
 
 export const routes = createBrowserRouter([
   {
@@ -31,15 +31,15 @@ export const routes = createBrowserRouter([
     element: <Cartview />,
   },
   {
-    path:"/book",
-    element:<Book />
+    path: "/book",
+    element: <Book />,
   },
   {
-    path:"/otp/verify",
-    element:<OtpVerify/>
+    path: "/otp/verify",
+    element: <OtpVerify />,
   },
   {
-    path:"/forgetPassword",
-    element:<ForgetPassword/>
-  }
+    path: "/forgetPassword",
+    element: <ForgetPassword />,
+  },
 ]);
