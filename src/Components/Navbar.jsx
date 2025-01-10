@@ -29,7 +29,6 @@ const Navbar = () => {
     setProfile(profile);
     setOrderCart(orders);
     setMobileNumber("");
-    setClothesList([]);
     setSelectedClothes([]);
   };
 
