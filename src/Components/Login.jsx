@@ -68,8 +68,7 @@ const Login = () => {
       setCredentialError("Either mobile num or password is wrong");
     } else {
       const user = response.data.curr_user;
-      const customer_order = user.customer_order;
-      delete user.customer_order;
+      const customer_order = response.data.customer_order;
 
       setUserProfile(user);
       setOrders(customer_order);
