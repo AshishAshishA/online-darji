@@ -106,6 +106,7 @@ function Home() {
       <div className="grid grid-cols-2 gap-4 mt-4 px-4">
         {searchClothList.map((item) => (
           <div
+            onClick={() => handleAddClothes(item)}
             key={item.id}
             className="flex flex-col items-center justify-center p-2 border-2 border-black rounded-md w-auto h-auto"
           >
@@ -117,7 +118,6 @@ function Home() {
             <p className="text-center text-sm font-semibold">{item.type}</p>
             <p className="text-center text-sm text-gray-700">{item.price}</p>
             <FaHeart
-              onClick={() => handleAddClothes(item)}
               className={
                 selectedClothes.indexOf(item) === -1
                   ? "text-gray-300"
