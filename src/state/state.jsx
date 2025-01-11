@@ -64,3 +64,13 @@ export const isForgetPasswordState = atom({
   key: "isForgetPassword",
   default: false,
 });
+
+export const searchedClothListState = atom({
+  key: "searchClothList",
+  default: [],
+});
+
+export const sidebarOpenStatusState = atom({
+  key: "sidebarOpenStatus",
+  default: false,
+});

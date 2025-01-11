@@ -5,12 +5,13 @@ import {
   userProfileState,
   orderCartState,
   orderStatus,
-  BASE_URL
+  BASE_URL,
 } from "../state/state";
 import { useRecoilState } from "recoil";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
 
 const Book = () => {
   const [clotheList, setClothesList] = useRecoilState(selectedClothesState);
@@ -23,6 +24,10 @@ const Book = () => {
 
   const handleItemSelect = (event) => {
     setItem(event.target.value); // Use the value of the selected option
+  };
+
+  const handleRemoveCloth = (cloth) => {
+    setClothesList((prev) => prev.filter((item) => item != cloth));
   };
 
   const handleOrderNow = async () => {
@@ -42,6 +47,7 @@ const Book = () => {
       };
 
       setOrderCart((prev) => [...prev, curr_order]);
+      setClothesList((prev) => []);
       console.log(orderCart);
       navigate("/cart");
     } else {
@@ -75,7 +81,11 @@ const Book = () => {
         {clotheList.map((item) => {
           return (
             <div key={item.id} className="border-2 p-2 w-[40vw]">
-              <img src={item.photo} alt="" className="w-20 h-20" />
+              <RxCross2
+                className="z-50"
+                onClick={() => handleRemoveCloth(item)}
+              />
+              <img src={item.photo} alt="" className="w-20 h-20 z-0" />
               <p>{item.type}</p>
               <p>{item.price}</p>
             </div>

@@ -10,6 +10,7 @@ import {
   orderCartState,
   mobileNumberState,
   selectedClothesState,
+  sidebarOpenStatusState,
   BASE_URL,
 } from "../state/state";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -22,6 +23,8 @@ const Navbar = () => {
   const [selectedClothes, setSelectedClothes] =
     useRecoilState(selectedClothesState);
 
+  const [sidebarOpenStatus, setSidebarOpenStatus] = useRecoilState(sidebarOpenStatusState);
+
   const handleLogout = () => {
     setLoginState(false);
     const profile = {};
@@ -32,9 +35,13 @@ const Navbar = () => {
     setSelectedClothes([]);
   };
 
+  const handleSidebar = () => {
+    setSidebarOpenStatus(prev => !prev);
+  }
+
   return (
     <div className="flex flex-row items-center justify-between m-0 p-1 h-9 bg-blue-500">
-      <HiBars3 />
+      <HiBars3 onClick={handleSidebar}/>
 
       <div className="flex flex-row items-center gap-3 mr-2">
         {loginState == false ? (
