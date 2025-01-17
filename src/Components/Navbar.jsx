@@ -11,6 +11,11 @@ import {
   mobileNumberState,
   selectedClothesState,
   sidebarOpenStatusState,
+  cleaningOrderListState,
+  dryCleaningOrderListState,
+  ironingOrderListState,
+  readyMadeClothesInCartState,
+  readyMadeOrderListState,
   BASE_URL,
 } from "../state/state";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -22,8 +27,26 @@ const Navbar = () => {
   const [mobileNumber, setMobileNumber] = useRecoilState(mobileNumberState);
   const [selectedClothes, setSelectedClothes] =
     useRecoilState(selectedClothesState);
+  const [cleaningOrderList, setCleaningOrderList] = useRecoilState(
+    cleaningOrderListState
+  );
+  const [readyMadeClothesInCart, setReadyMadeClothesInCart] = useRecoilState(
+    readyMadeClothesInCartState
+  );
 
-  const [sidebarOpenStatus, setSidebarOpenStatus] = useRecoilState(sidebarOpenStatusState);
+  const [readyMadeOrderList, setReadyMadeOrderList] = useRecoilState(
+    readyMadeOrderListState
+  );
+  const [dryCleaningOrderList, setDryCleaningOrderList] = useRecoilState(
+    dryCleaningOrderListState
+  );
+  const [ironingOrderList, setIroningOrderList] = useRecoilState(
+    ironingOrderListState
+  );
+
+  const [sidebarOpenStatus, setSidebarOpenStatus] = useRecoilState(
+    sidebarOpenStatusState
+  );
 
   const handleLogout = () => {
     setLoginState(false);
@@ -33,15 +56,20 @@ const Navbar = () => {
     setOrderCart(orders);
     setMobileNumber("");
     setSelectedClothes([]);
+    setCleaningOrderList([]);
+    setDryCleaningOrderList([]);
+    setIroningOrderList([]);
+    setReadyMadeClothesInCart([]);
+    setReadyMadeOrderList([]);
   };
 
   const handleSidebar = () => {
-    setSidebarOpenStatus(prev => !prev);
-  }
+    setSidebarOpenStatus((prev) => !prev);
+  };
 
   return (
     <div className="flex flex-row items-center justify-between m-0 p-1 h-9 bg-blue-500">
-      <HiBars3 onClick={handleSidebar}/>
+      <HiBars3 onClick={handleSidebar} />
 
       <div className="flex flex-row items-center gap-3 mr-2">
         {loginState == false ? (

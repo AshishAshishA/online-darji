@@ -117,6 +117,7 @@ const Signup = () => {
         {
           name: name,
           mobile_num: mobileNum,
+          is_mob_num_verified: true,
           address: address,
           pincode: pincode,
           landmark: landmark,
@@ -135,8 +136,8 @@ const Signup = () => {
       response.status === 201 ||
       response.status === 204
     ) {
-      const user = response.data;
-      delete user.customer_order;
+      const user = response.data.customer;
+      // delete user.customer_order;
       setUserProfile(user);
       setLoginState(true);
       if (updateStatus == true) {

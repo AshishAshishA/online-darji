@@ -6,8 +6,12 @@ import Profile from "./Profile";
 import Cartview from "./Cartview";
 import OtpVerify from "./OtpVerify";
 import { createBrowserRouter } from "react-router-dom";
-import Book from "./Book";
 import ForgetPassword from "./ForgetPassword";
+import ReadyMade from "./ReadyMade";
+import CleaningOrder from "./CleaningOrder";
+import IroningOrder from "./IroningOrder";
+import DryCleaningOrder from "./DryCleaningOrder";
+import DarjiOrder from "./DarjiOrder";
 
 export const routes = createBrowserRouter([
   {
@@ -32,7 +36,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/book",
-    element: <Book />,
+    element: <DarjiOrder />,
   },
   {
     path: "/otp/verify",
@@ -41,5 +45,21 @@ export const routes = createBrowserRouter([
   {
     path: "/forgetPassword",
     element: <ForgetPassword />,
+  },
+  {
+    path: "/readymade/page",
+    element: <ReadyMade />,
+  },
+  {
+    path: "/cleaning/order",
+    element: <CleaningOrder />,
+  },
+  {
+    path: "/press/order",
+    element: <IroningOrder />,
+  },
+  {
+    path: "/dryclean/order",
+    element: <DryCleaningOrder />,
   },
 ]);

@@ -8,7 +8,7 @@ import {
   loginStatusState,
   mobileNumberState,
   isForgetPasswordState,
-  BASE_URL
+  BASE_URL,
 } from "../state/state";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -84,11 +84,10 @@ const OtpVerify = () => {
               placeholder="mobile num"
               value={mobileNum}
               onChange={handleMobileChange}
-              maxLength={10} // Optionally, limit to 10 characters
+              maxLength={10}
               className="border-b-2 border-blue-500 rounded-md w-[90%] p-1"
             />
             <span className="text-[10px] text-red-500">{mobError}</span>{" "}
-            {/* Display error message */}
             {otpStatus == true ? (
               <>
                 <input

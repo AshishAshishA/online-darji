@@ -1,3 +1,7 @@
+import cleaning from "./../assets/cleaning.png";
+import dry_cleaning from "./../assets/dry_cleaning.png";
+import ironing from "./../assets/ironing.png";
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
@@ -10,10 +14,12 @@ import { CiHeart } from "react-icons/ci";
 import Navbar from "./Navbar";
 import Footer from "../Footer";
 import Sidebar from "./Sidebar";
+import ReadyMadeClothSlide from "./ReadyMadeClothSlide";
 import { Link } from "react-router-dom";
 import {
   selectedClothesState,
   searchedClothListState,
+  readyMadeSliderState,
   BASE_URL,
 } from "../state/state";
 import { FaRegHeart } from "react-icons/fa";
@@ -28,6 +34,9 @@ function Home() {
   const [searchClothList, setSearchClothList] = useRecoilState(
     searchedClothListState
   );
+
+  const [readyMadeSlider, setReadyMadeSlider] =
+    useRecoilState(readyMadeSliderState);
 
   const sidebarOpenStatus = useRecoilValue(sidebarOpenStatusState);
 
@@ -59,18 +68,53 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/clothes/`);
-        setClothesList(response.data);
-        setSearchClothList(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const fetchClothesData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/clothes/`);
+      setClothesList(response.data);
+      setSearchClothList(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    fetchData();
+  const fetchSliderData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/readymade/slider/`);
+      setReadyMadeSlider(response.data?.readymadeSliderItems);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handlePressRedirect = () => {
+    if (loginStatus == false) {
+      navigate("/login");
+    } else {
+      navigate("/press/order");
+    }
+  };
+
+  const handleDryCleaningRedirect = () => {
+    if (loginStatus == false) {
+      navigate("/login");
+    } else {
+      navigate("/dryclean/order");
+    }
+  };
+
+  const handleCleaningRedirect = () => {
+    if (loginStatus == false) {
+      navigate("/login");
+    } else {
+      navigate("/cleaning/order");
+    }
+  };
+
+  useEffect(() => {
+    fetchSliderData();
+    fetchClothesData();
   }, []);
 
   return (
@@ -83,6 +127,43 @@ function Home() {
         <></>
       )}
       <Navbar />
+      <ReadyMadeClothSlide />
+      <div className="mt-2">
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src={ironing}
+              alt="ironing"
+              className="w-[40px] h-[40px]"
+              onClick={handlePressRedirect}
+            />
+            <p>(press)</p>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src={cleaning}
+              alt="cleaning"
+              className="w-[40px] h-[40px]"
+              onClick={handleCleaningRedirect}
+            />
+            <p>(cleaning)</p>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src={dry_cleaning}
+              alt="dry cleaning"
+              className="w-[40px] h-[40px]"
+              onClick={handleDryCleaningRedirect}
+            />
+            <p>(dry cleaning)</p>
+          </div>
+        </div>
+      </div>
+
+      <p className="w-full flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-600 mt-4 h-[25px] text-white font-extrabold text-lg uppercase border-t-2 border-b-2 border-red-600 shadow-lg">
+        Darji Services
+      </p>
+
       <div className="flex items-center justify-center py-2">
         <button className="bg-pink-600 border-2 rounded-md p-2 text-white">
           {loginStatus === true ? (

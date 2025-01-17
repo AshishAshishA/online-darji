@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   userProfileState,
-  orderCartState,
   loginStatusState,
   isForgetPasswordState,
+  darjiOrderListState,
+  readyMadeOrderListState,
+  cleaningOrderListState,
+  ironingOrderListState,
+  dryCleaningOrderListState,
   BASE_URL,
 } from "../state/state";
 import { useRecoilState } from "recoil";
@@ -16,13 +20,26 @@ const Login = () => {
   const [mobileNum, setMobileNum] = useState("");
   const [password, setPassword] = useState("");
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [orders, setOrders] = useRecoilState(orderCartState);
   const [error, setError] = useState("");
   const [credentialError, setCredentialError] = useState("");
   const [loginStatus, setLoginStatus] = useRecoilState(loginStatusState);
   const [forgetPasswordStatus, setForgetPasswordStatus] = useRecoilState(
     isForgetPasswordState
   );
+  const [darjiOrderList, setDarjiOrderList] =
+    useRecoilState(darjiOrderListState);
+  const [readyMadeOrderList, setReadyMadeOrderList] = useRecoilState(
+    readyMadeOrderListState
+  );
+  const [cleaningOrderList, setCleaningOrderList] = useRecoilState(
+    cleaningOrderListState
+  );
+
+  const [ironingOrderList, setIroningOrderList] = useRecoilState(
+    ironingOrderListState
+  );
+
+  const [dryCleaningOrderList, setDryCleaningOrderList] = useRecoilState(dryCleaningOrderListState)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,10 +85,19 @@ const Login = () => {
       setCredentialError("Either mobile num or password is wrong");
     } else {
       const user = response.data.curr_user;
-      const customer_order = response.data.customer_order;
+      const customer_darji_order = response.data.customer_darji_order;
+      const customer_readymade_order = response.data.customer_readymade_order;
+      const customer_cleaning_order = response.data.cleaning_order_list;
+      const customer_press_order = response.data.press_order_list;
+      const customer_drycleaning_order = response.data.drycleaning_order_list;
 
+      // console.log(customer_readymade_order);
       setUserProfile(user);
-      setOrders(customer_order);
+      setDarjiOrderList(customer_darji_order);
+      setReadyMadeOrderList(customer_readymade_order);
+      setCleaningOrderList(customer_cleaning_order);
+      setIroningOrderList(customer_press_order);
+      setDryCleaningOrderList(customer_drycleaning_order)
       setLoginStatus(true);
       navigate("/");
     }

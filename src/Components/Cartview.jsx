@@ -1,30 +1,31 @@
 import React, { useState } from "react";
-import {
-  orderItem,
-  orderStatus,
-  orderCartState,
-  userProfileState,
-  BASE_URL
-} from "../state/state";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { FaRegCircle } from "react-icons/fa6";
+import { userProfileState, orderSection } from "../state/state";
+import { useRecoilState } from "recoil";
 import profile_img from "./../assets/profile_img1.svg";
 import { BsCartCheckFill } from "react-icons/bs";
 
-const Cartview = () => {
-  const [orderCartProducts, setOrderCartProducts] =
-    useRecoilState(orderCartState);
-  const [currentOrder, setCurrOrder] = useState(-1);
-  const [userDetails, setUserDetails] = useRecoilState(userProfileState);
+import CleaningOrderView from "./CleaningOrderView";
+import DarjiOrderView from "./DarjiOrderView";
+import DryCleaningOrderView from "./DryCleaningOrderView";
+import IroningOrderView from "./IroningOrderView";
+import ReadyMadeOrderView from "./ReadyMadeOrderView";
 
-  const handleCurrOrderView = (index) => {
-    if (currentOrder == index) setCurrOrder(-1);
-    else setCurrOrder(index);
+const Cartview = () => {
+  const [userDetails, setUserDetails] = useRecoilState(userProfileState);
+  const [currOrderSection, setCurrOrderSection] = useState("");
+
+  const handleSetCurrOrderSec = (inputSection) => {
+    console.log(inputSection);
+    if (currOrderSection != inputSection) {
+      setCurrOrderSection((prev) => inputSection);
+    } else {
+      setCurrOrderSection((prev) => "");
+    }
   };
 
   return (
     <div className="w-full h-screen flex flex-col items-center m-1">
-      
+      <div></div>
       <div
         id="user detail"
         className="flex flex-col items-center justify-start m-5"
@@ -35,59 +36,87 @@ const Cartview = () => {
       </div>
       <p className="font-semibold">Orders</p>
       <BsCartCheckFill />
-      {orderCartProducts.map((item, index) => (
-        <div className="p-2">
+
+      <div className="flex flex-col gap-2">
+        <div>
           <button
-            onClick={() => handleCurrOrderView(index)}
-            className="w-full bg-blue-600 p-2 rounded-md"
+            className="w-full bg-blue-500 p-2"
+            onClick={() => handleSetCurrOrderSec(orderSection.darji)}
           >
-            order <span>{index + 1}</span>
+            Darji Order
           </button>
-          <div className={index == currentOrder ? "border-2 rounded-sm border-gray-400 mt-1 p-1" : "hidden"}>
-            <p>
-              order type: <span>{item.item}</span>
-            </p>
-            <div className="">
-              <p>Clothes : selected to choose from</p>
-              <div className="flex m-2 gap-2 items-center justify-start text-[10px]">
-                {item.clothes.map((clothItem) => (
-                  <div className="flex flex-col items-center justify-center">
-                    <img
-                      src={clothItem.photo}
-                      alt="image"
-                      className="w-20 h-20 flex flex-col gap-2"
-                    />
-                    <p>{clothItem.type}</p>
-                    <p>{clothItem.price}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <hr className="m-1"/>
-            <div className="flex flex-row items-center justify-around">
-              {Object.entries(orderStatus).map((entry) => {
-                let key = entry[0];
-                let value = entry[1];
-                return (
-                  <div>
-                    {value == item.status ? (
-                      <div className="flex flex-col items-center justify-center">
-                        <FaRegCircle className="bg-green-500 text-green-700 rounded-lg" />
-                        <p className="text-[7px]">{value}</p>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center">
-                        <FaRegCircle className="bg-gray-300 text-gray-400 rounded-lg" />
-                        <p className="text-[7px]">{value}</p>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+
+          {currOrderSection == orderSection.darji ? (
+            <>
+              <DarjiOrderView />
+              {console.log("DarjiWala")}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
-      ))}
+        <div>
+          <button
+            className="w-full bg-blue-500 p-2"
+            onClick={() => handleSetCurrOrderSec(orderSection.readyMade)}
+          >
+            ReadyMade Order
+          </button>
+
+          {currOrderSection == orderSection.readyMade ? (
+            <>
+              <ReadyMadeOrderView />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <button
+            className="w-full bg-blue-500 p-2"
+            onClick={() => handleSetCurrOrderSec(orderSection.ironing)}
+          >
+            Press Order
+          </button>
+          {currOrderSection == orderSection.ironing ? (
+            <>
+              <IroningOrderView />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <button
+            className="w-full bg-blue-500 p-2"
+            onClick={() => handleSetCurrOrderSec(orderSection.cleaning)}
+          >
+            Cleaning Order
+          </button>
+          {currOrderSection == orderSection.cleaning ? (
+            <>
+              <CleaningOrderView />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <button
+            className="w-full bg-blue-500 p-2"
+            onClick={() => handleSetCurrOrderSec(orderSection.dryClean)}
+          >
+            DryClean Order
+          </button>
+          {currOrderSection == orderSection.dryClean ? (
+            <>
+              <DryCleaningOrderView />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
