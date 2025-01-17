@@ -93,7 +93,7 @@ export const Service = {
   },
 };
 
-export const BASE_URL = "https://online-darji-wala.onrender.com";
+export const BASE_URL = "https://allkapdaservices.onrender.com/";
 // https://online-darji-wala.onrender.com
 
 export const orderItem = {
